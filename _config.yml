@@ -8,7 +8,7 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-site_theme               : "air" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
+site_theme               : "contrast" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
 title                    : "Kunwoo Park (박건우)"
 title_separator          : "-"
 name                     : &name "Kunwoo Park"
@@ -23,7 +23,7 @@ repository               : "kunhailP/kunhailP.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "images/박건우_증명사진.png"
+  avatar           : "images/profile.jpg"
   name             : "Your Sidebar Name"
   pronouns         : # example: "she/her"  
   bio              : "politics"
