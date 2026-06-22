@@ -23,7 +23,7 @@ repository               : "kunhailP/kunhailP.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "images/박건우_증명사진.png"
   name             : "Your Sidebar Name"
   pronouns         : # example: "she/her"  
   bio              : "politics"
