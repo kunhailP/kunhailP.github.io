@@ -66,7 +66,7 @@ const researchThemes = [
           "My work draws on partial identification, measurement, and statistical inference."
   },
   {
-    title: "Computational Political Science",
+    title: "Computational Social Science",
     text: "I study how text and language models can be used as measurement instruments in political research, " +
           "with particular attention to comparability, calibration, and downstream inference."
   },
