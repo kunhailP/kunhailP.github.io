@@ -1,0 +1,169 @@
+/**
+ * Renders content from data/site-data.js into each page.
+ * A section is filled only if its container element exists on the page.
+ */
+
+function el(tag, attrs, ...children) {
+  const node = document.createElement(tag);
+  Object.entries(attrs || {}).forEach(([key, value]) => {
+    if (value !== null && value !== undefined && value !== false) node.setAttribute(key, value);
+  });
+  children.flat().forEach((child) => {
+    if (child === null || child === undefined || child === '') return;
+    node.appendChild(typeof child === 'string' ? document.createTextNode(child) : child);
+  });
+  return node;
+}
+
+function externalLink(text, href) {
+  return el('a', { href, target: '_blank', rel: 'noopener' }, text);
+}
+
+function statusLabel(key) {
+  const status = paperStatuses.find((s) => s.key === key);
+  return status ? status.label : '';
+}
+
+// Paper · Code · Data · Replication — only links with a real URL are rendered.
+function paperLinks(links) {
+  const order = [['paper', 'Paper'], ['code', 'Code'], ['data', 'Data'], ['replication', 'Replication']];
+  const items = order.filter(([key]) => links && typeof links[key] === 'string' && links[key].trim());
+  if (!items.length) return null;
+  return el('span', { class: 'paper-links' },
+    items.map(([key, label]) => externalLink(label, links[key].trim())));
+}
+
+function renderProfile() {
+  const bio = document.getElementById('bio');
+  if (bio) SITE.bio.forEach((p) => bio.appendChild(el('p', null, p)));
+
+  const links = document.getElementById('profile-links');
+  if (links) {
+    const items = [
+      el('a', { href: `mailto:${SITE.links.email}` }, 'Email'),
+      externalLink('CV', SITE.links.cv),
+      externalLink('GitHub', SITE.links.github)
+    ];
+    if (SITE.links.scholar) items.push(externalLink('Google Scholar', SITE.links.scholar));
+    items.forEach((a) => links.appendChild(a));
+  }
+
+  const email = document.getElementById('contact-email');
+  if (email) email.appendChild(el('a', { href: `mailto:${SITE.links.email}` }, SITE.links.email));
+}
+
+function renderEducation() {
+  const list = document.getElementById('education-list');
+  if (!list) return;
+  education.forEach((e) => {
+    list.appendChild(el('li', { class: 'entry' },
+      el('div', { class: 'entry-head' },
+        el('span', { class: 'entry-title' }, e.degree),
+        el('span', { class: 'entry-date' }, e.period)),
+      el('div', { class: 'entry-meta' }, e.institution),
+      e.details.length ? el('div', { class: 'entry-meta' }, e.details.join(' · ')) : null));
+  });
+}
+
+function renderSelectedResearch() {
+  const list = document.getElementById('selected-research-list');
+  if (!list) return;
+  const selected = papers.filter((p) => p.selected).sort((a, b) => {
+    const ia = selectedOrder.indexOf(a.title);
+    const ib = selectedOrder.indexOf(b.title);
+    return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+  });
+  selected.forEach((p) => list.appendChild(paperItem(p, true)));
+}
+
+function paperItem(p, showDescription) {
+  const meta = [];
+  if (p.authors) meta.push(el('span', null, p.authors));
+  if (p.venue) meta.push(el('em', null, p.venue));
+  // On the Papers page the subsection heading already gives the status.
+  if (showDescription) meta.push(el('span', { class: 'status' }, statusLabel(p.status)));
+  else if (p.status === 'conditionally-accepted') meta.push(el('span', null, statusLabel(p.status)));
+  if (p.note) meta.push(el('span', null, p.note.replace(/\.$/, '')));
+
+  return el('li', { class: 'paper' },
+    el('div', { class: 'paper-title' }, p.title),
+    showDescription && p.description ? el('div', { class: 'paper-desc' }, p.description) : null,
+    meta.length || paperLinks(p.links)
+      ? el('div', { class: 'paper-meta' },
+          meta.length ? el('span', { class: 'meta-items' }, meta) : null,
+          paperLinks(p.links))
+      : null);
+}
+
+function renderPapers() {
+  const root = document.getElementById('papers-by-status');
+  if (!root) return;
+  paperStatuses.forEach((status) => {
+    const group = papers.filter((p) => p.status === status.key);
+    if (!group.length) return;
+    const id = `papers-${status.key}`;
+    root.appendChild(el('section', { class: 'section', 'aria-labelledby': id },
+      el('h2', { id }, status.heading),
+      el('ul', { class: 'plain-list' }, group.map((p) => paperItem(p, false)))));
+  });
+}
+
+function renderThemes() {
+  const root = document.getElementById('research-themes');
+  if (!root) return;
+  researchThemes.forEach((t) => {
+    root.appendChild(el('div', { class: 'theme' },
+      el('h3', null, t.title),
+      el('p', null, t.text)));
+  });
+}
+
+function renderExperience() {
+  const list = document.getElementById('experience-list');
+  if (!list) return;
+  researchExperience.forEach((x) => {
+    const meta = [x.unit, x.institution].filter(Boolean).join(', ');
+    let person = '';
+    if (x.supervisor) person = x.role === 'Research Assistant' ? `PI: ${x.supervisor}` : `Supervisor: ${x.supervisor}`;
+    list.appendChild(el('li', { class: 'entry' },
+      el('div', { class: 'entry-head' },
+        el('span', { class: 'entry-title' }, x.role),
+        el('span', { class: 'entry-date' }, x.period)),
+      el('div', { class: 'entry-meta' }, meta),
+      person ? el('div', { class: 'entry-meta' }, person) : null,
+      x.project ? el('div', { class: 'entry-meta' }, 'Project: ', el('span', { class: 'project-title' }, `“${x.project}”`)) : null,
+      x.description ? el('p', { class: 'entry-desc' }, x.description) : null));
+  });
+}
+
+function renderHonors() {
+  const list = document.getElementById('honors-list');
+  if (!list) return;
+  honors.forEach((h) => {
+    list.appendChild(el('li', { class: 'dated' },
+      el('span', { class: 'dated-year' }, h.year),
+      el('span', null, el('span', { class: 'honor-title' }, h.title), `, ${h.detail}`)));
+  });
+}
+
+function renderSkills() {
+  const list = document.getElementById('skills-list');
+  if (!list) return;
+  skills.forEach((s) => {
+    list.appendChild(el('div', { class: 'skill-row' },
+      el('dt', null, s.label),
+      el('dd', null, s.value)));
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderProfile();
+  renderEducation();
+  renderSelectedResearch();
+  renderPapers();
+  renderThemes();
+  renderExperience();
+  renderHonors();
+  renderSkills();
+  initializeDarkMode();
+});
