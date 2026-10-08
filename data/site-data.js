@@ -12,7 +12,7 @@
 
 const SITE = {
   name: "Kunwoo Park",
-  tagline: "Political Science · Political Methodology · Computational Social Science",
+  tagline: "Political Methodology · NLP · Causal Inference",
   affiliation: [
     "Department of Political Science and International Relations",
     "Kookmin University, Seoul, Korea"
@@ -29,7 +29,7 @@ const SITE = {
   ],
 
   // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
-  photo: "",
+  photo: "assets/images/profile.jpg",
 
   links: {
     email: "pkw6094@kookmin.ac.kr",
@@ -102,7 +102,7 @@ const papers = [
     description: "",
     selected: false,
     // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
-  photo: "",
+  photo: "assets/images/profile.jpg",
 
   links: { paper: "", code: "", data: "", replication: "" }
   },
@@ -116,7 +116,7 @@ const papers = [
     description: "Studies the cost of exploration when the goal is to learn boundary and population causal effects.",
     selected: true,
     // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
-  photo: "",
+  photo: "assets/images/profile.jpg",
 
   links: { paper: "", code: "", data: "", replication: "" }
   },
@@ -130,7 +130,7 @@ const papers = [
     description: "Examines asymmetric enforcement and take-up frictions in Korea’s Basic Pension.",
     selected: true,
     // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
-  photo: "",
+  photo: "assets/images/profile.jpg",
 
   links: { paper: "", code: "", data: "", replication: "" }
   },
@@ -144,7 +144,7 @@ const papers = [
     description: "Asks whether party measures produced by language models can be meaningfully compared.",
     selected: true,
     // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
-  photo: "",
+  photo: "assets/images/profile.jpg",
 
   links: { paper: "", code: "", data: "", replication: "" }
   },
@@ -157,7 +157,7 @@ const papers = [
     description: "",
     selected: false,
     // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
-  photo: "",
+  photo: "assets/images/profile.jpg",
 
   links: { paper: "", code: "", data: "", replication: "" }
   },
@@ -170,7 +170,7 @@ const papers = [
     description: "",
     selected: false,
     // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
-  photo: "",
+  photo: "assets/images/profile.jpg",
 
   links: { paper: "", code: "", data: "", replication: "" }
   },
@@ -183,7 +183,7 @@ const papers = [
     description: "",
     selected: false,
     // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
-  photo: "",
+  photo: "assets/images/profile.jpg",
 
   links: { paper: "", code: "", data: "", replication: "" }
   },
@@ -196,7 +196,7 @@ const papers = [
     description: "",
     selected: false,
     // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
-  photo: "",
+  photo: "assets/images/profile.jpg",
 
   links: { paper: "", code: "", data: "", replication: "" }
   }
