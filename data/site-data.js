@@ -12,7 +12,7 @@
 
 const SITE = {
   name: "Kunwoo Park",
-  tagline: "Political Methodology · NLP · Causal Inference",
+  tagline: "Political Methodology · Computational Social Science · Political Behavior",
   affiliation: [
     "Department of Political Science and International Relations",
     "Kookmin University, Seoul, Korea"
@@ -23,7 +23,8 @@ const SITE = {
     "I am an undergraduate researcher in Political Science and International Relations at Kookmin University, " +
     "with a second major in AI, Big Data and Management and a minor in Economics. " +
     "My research interests lie in political methodology, political behavior, and political economy. " +
-    "Methodologically, I am interested in statistical inference and partial identification, " +
+    "I am particularly interested in inference when politically meaningful quantities are only partially observed, " +
+    "noisily measured, or constructed using computational models, drawing on partial identification, " +
     "computational text analysis, and measurement with large language models. " +
     "Substantively, I study political accountability, blame attribution, welfare politics, and deservingness."
   ],
@@ -60,14 +61,14 @@ const education = [
 const researchThemes = [
   {
     title: "Political Methodology",
-    text: "Statistical inference, partial identification, and measurement. " +
-          "I am interested in how to quantify uncertainty and draw credible inferences " +
-          "when politically meaningful quantities are imperfectly observed."
+    text: "I study inference when politically meaningful quantities are partially observed, noisily measured, " +
+          "or otherwise imperfectly linked to the data researchers observe. " +
+          "My work draws on partial identification, measurement, and statistical inference."
   },
   {
     title: "Computational Political Science",
-    text: "Text as data, natural language processing, and measurement with large language models. " +
-          "A recurring question is how predictive performance relates to valid substantive inference."
+    text: "I study how text and language models can be used as measurement instruments in political research, " +
+          "with particular attention to comparability, calibration, and downstream inference."
   },
   {
     title: "Political Behavior & Political Economy",
@@ -221,11 +222,12 @@ const researchExperience = [
 
 /* ---------------------------------------------------------------------------
  * SELECTED HONORS (keep short; full list belongs in the CV)
+ * home: true = shown on the home page (keep it to ~3).
  * ------------------------------------------------------------------------- */
 const honors = [
-  { year: "2026", title: "Minister of Foreign Affairs Award", detail: "Public Data and AI Competition, Ministry of Foreign Affairs" },
-  { year: "2026", title: "Minister of Gender Equality and Family Award", detail: "AI and Data Convergence Idea and Analysis Competition, Ministry of Gender Equality and Family" },
-  { year: "2026", title: "10th Place", detail: "Poverty Prediction Challenge, World Bank and DrivenData (1,322 registered participants)" },
+  { year: "2026", title: "Minister of Foreign Affairs Award", detail: "Public Data and AI Competition, Ministry of Foreign Affairs", home: true },
+  { year: "2026", title: "Minister of Gender Equality and Family Award", detail: "AI and Data Convergence Idea and Analysis Competition, Ministry of Gender Equality and Family", home: true },
+  { year: "2026", title: "10th Place", detail: "Poverty Prediction Challenge, World Bank and DrivenData (1,322 registered participants)", home: true },
   { year: "2026", title: "Second Place", detail: "DACON Smart Warehouse Delay Prediction AI Competition (607 teams)" },
   { year: "2025", title: "Second Prize", detail: "KOSSDA Undergraduate Data Visualization Competition" }
 ];

@@ -154,7 +154,7 @@ function renderExperience() {
 function renderHonors() {
   const list = document.getElementById('honors-list');
   if (!list) return;
-  honors.forEach((h) => {
+  honors.filter((h) => h.home).forEach((h) => {
     list.appendChild(el('li', { class: 'dated' },
       el('span', { class: 'dated-year' }, h.year),
       el('span', null, `${h.title}, ${h.detail}`)));

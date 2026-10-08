@@ -32,7 +32,7 @@ Almost everything lives in **`data/site-data.js`**. Empty strings (`""`) are nev
 - **Papers**: edit the `papers` array. Set `status` to one of `conditionally-accepted`, `under-review`, `working-paper`, `in-progress`; the Papers page groups entries by these. Update `status` only when it has actually changed.
 - **Paper links**: fill in `links: { paper, code, data, replication }`. A button is shown only when its URL is not empty.
 - **Home-page "Selected Research"**: set `selected: true` on a paper (keep it to about 3) and list its title in `selectedOrder`. The `description` sentence appears only there.
-- **Research experience / honors / skills / education**: edit the matching arrays.
+- **Research experience / honors / skills / education**: edit the matching arrays. Only honors with `home: true` appear on the home page (keep it to about 3); the full list lives in the CV.
 - **Links**: `SITE.links` (email, GitHub, CV path, Google Scholar). Google Scholar shows up on the home page once `scholar` is filled in.
 - **Bio / tagline**: `SITE.bio` and `SITE.tagline`. The name, tagline, and affiliation are also written directly into `index.html` so they display even without JavaScript and for search engines; update both places.
 
