@@ -38,8 +38,9 @@ Almost everything lives in **`data/site-data.js`**. Empty strings (`""`) are nev
 
 ### Profile photo
 
-Replace `assets/images/profile.jpg` with a square photo (320×320 px or larger) under the same name.
-It is shown at 160×160 px to the right of the intro on desktop and above the name on mobile.
+Put a roughly square photo (e.g. 400×400 px or larger, JPG/PNG) at `assets/images/profile.jpg` and set
+`photo: "assets/images/profile.jpg"` in `SITE` (in `data/site-data.js`). Leave it as `""` to show no photo.
+The photo is shown at 160×160 px to the right of the intro on desktop and above the name on mobile.
 
 ### CV
 

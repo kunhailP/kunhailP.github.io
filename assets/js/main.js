@@ -52,6 +52,15 @@ function renderProfile() {
     if (SITE.links.scholar) items.push(externalLink('Google Scholar', SITE.links.scholar));
     items.forEach((a) => links.appendChild(a));
   }
+
+  // Profile photo appears only when SITE.photo is set.
+  const profile = document.querySelector('.profile-section');
+  if (profile && SITE.photo) {
+    profile.appendChild(el('img', {
+      class: 'profile-photo', src: SITE.photo, alt: SITE.name,
+      width: '160', height: '160', loading: 'eager'
+    }));
+  }
 }
 
 function renderEducation() {
