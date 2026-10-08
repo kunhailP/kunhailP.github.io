@@ -15,10 +15,11 @@ Plain HTML/CSS/JS — no build step, no framework, no external dependencies.
 │   └── site-data.js      ALL editable content (bio, papers, experience, honors, skills, links)
 ├── assets/
 │   ├── css/style.css     Styles (light + dark mode)
+│   ├── fonts/            Lato web fonts (self-hosted)
 │   ├── js/site-shell.js  Shared header navigation and footer
 │   ├── js/main.js        Renders site-data.js into the pages
 │   ├── js/utils.js       Dark-mode toggle
-│   ├── images/           Favicon (and a photo, if you add one later)
+│   ├── images/           Favicon and profile photo
 │   └── files/            Kunwoo_Park_CV.pdf
 ├── robots.txt, sitemap.xml, .nojekyll
 └── README.md
@@ -34,6 +35,12 @@ Almost everything lives in **`data/site-data.js`**. Empty strings (`""`) are nev
 - **Research experience / honors / skills / education**: edit the matching arrays.
 - **Links**: `SITE.links` (email, GitHub, CV path, Google Scholar). Google Scholar shows up on the home page once `scholar` is filled in.
 - **Bio / tagline**: `SITE.bio` and `SITE.tagline`. The name, tagline, and affiliation are also written directly into `index.html` so they display even without JavaScript and for search engines; update both places.
+
+### Profile photo
+
+Put a roughly square photo (e.g. 400×400 px or larger, JPG/PNG) at `assets/images/profile.jpg` and set
+`photo: "assets/images/profile.jpg"` in `SITE` (in `data/site-data.js`). Leave it as `""` to show no photo.
+The photo is shown at 160×160 px to the right of the intro on desktop and above the name on mobile.
 
 ### CV
 
@@ -66,7 +73,7 @@ All internal links are relative, so the site also works from a project repositor
 
 ## Credits
 
-Layout, the shared-shell approach, and the dark-mode approach are adapted from the
+The visual style (Lato, blue/orange link colors, navigation, section headings, footer), the shared-shell approach, and dark mode are adapted from the
 [Academic Homepage Template](https://github.com/Arvid-pku/Academic-Homepage-Template) by Xunjian Yin
 ("Free to use for personal and academic homepages. Attribution appreciated but not required.").
-The footer credits the template.
+The footer credits the template. Lato is by Łukasz Dziedzic, licensed under the SIL Open Font License 1.1.

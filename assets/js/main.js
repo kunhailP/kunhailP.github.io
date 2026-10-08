@@ -24,13 +24,18 @@ function statusLabel(key) {
   return status ? status.label : '';
 }
 
-// Paper · Code · Data · Replication — only links with a real URL are rendered.
+// [ Paper | Code | Data | Replication ] — only links with a real URL are rendered.
 function paperLinks(links) {
   const order = [['paper', 'Paper'], ['code', 'Code'], ['data', 'Data'], ['replication', 'Replication']];
   const items = order.filter(([key]) => links && typeof links[key] === 'string' && links[key].trim());
   if (!items.length) return null;
-  return el('span', { class: 'paper-links' },
-    items.map(([key, label]) => externalLink(label, links[key].trim())));
+  const wrapper = el('span', { class: 'paper-links' }, '[ ');
+  items.forEach(([key, label], i) => {
+    if (i > 0) wrapper.appendChild(document.createTextNode(' | '));
+    wrapper.appendChild(externalLink(label, links[key].trim()));
+  });
+  wrapper.appendChild(document.createTextNode(' ]'));
+  return wrapper;
 }
 
 function renderProfile() {
@@ -48,8 +53,14 @@ function renderProfile() {
     items.forEach((a) => links.appendChild(a));
   }
 
-  const email = document.getElementById('contact-email');
-  if (email) email.appendChild(el('a', { href: `mailto:${SITE.links.email}` }, SITE.links.email));
+  // Profile photo appears only when SITE.photo is set.
+  const profile = document.querySelector('.profile-section');
+  if (profile && SITE.photo) {
+    profile.appendChild(el('img', {
+      class: 'profile-photo', src: SITE.photo, alt: SITE.name,
+      width: '160', height: '160', loading: 'eager'
+    }));
+  }
 }
 
 function renderEducation() {
@@ -57,11 +68,9 @@ function renderEducation() {
   if (!list) return;
   education.forEach((e) => {
     list.appendChild(el('li', { class: 'entry' },
-      el('div', { class: 'entry-head' },
-        el('span', { class: 'entry-title' }, e.degree),
-        el('span', { class: 'entry-date' }, e.period)),
-      el('div', { class: 'entry-meta' }, e.institution),
-      e.details.length ? el('div', { class: 'entry-meta' }, e.details.join(' · ')) : null));
+      el('div', { class: 'entry-head' }, el('strong', null, `${e.institution} (${e.period})`)),
+      el('div', { class: 'entry-rest' }, e.degree),
+      e.details.length ? el('div', { class: 'entry-rest' }, e.details.join(' · ')) : null));
   });
 }
 
@@ -78,21 +87,30 @@ function renderSelectedResearch() {
 
 function paperItem(p, showDescription) {
   const meta = [];
-  if (p.authors) meta.push(el('span', null, p.authors));
-  if (p.venue) meta.push(el('em', null, p.venue));
+  if (p.authors) meta.push(p.authors);
+  if (p.venue) meta.push(el('span', { class: 'paper-venue' }, p.venue));
   // On the Papers page the subsection heading already gives the status.
-  if (showDescription) meta.push(el('span', { class: 'status' }, statusLabel(p.status)));
-  else if (p.status === 'conditionally-accepted') meta.push(el('span', null, statusLabel(p.status)));
-  if (p.note) meta.push(el('span', null, p.note.replace(/\.$/, '')));
+  if (showDescription || p.status === 'conditionally-accepted') meta.push(statusLabel(p.status));
+  if (p.note) meta.push(p.note.replace(/\.$/, ''));
 
-  return el('li', { class: 'paper' },
-    el('div', { class: 'paper-title' }, p.title),
-    showDescription && p.description ? el('div', { class: 'paper-desc' }, p.description) : null,
-    meta.length || paperLinks(p.links)
-      ? el('div', { class: 'paper-meta' },
-          meta.length ? el('span', { class: 'meta-items' }, meta) : null,
-          paperLinks(p.links))
-      : null);
+  const rest = el('div', { class: 'paper_rest' });
+  if (showDescription && p.description) {
+    rest.appendChild(el('span', { class: 'paper-desc' }, p.description));
+    rest.appendChild(el('br'));
+  }
+  meta.forEach((m, i) => {
+    if (i > 0) rest.appendChild(document.createTextNode(' · '));
+    rest.appendChild(typeof m === 'string' ? document.createTextNode(m) : m);
+  });
+  const links = paperLinks(p.links);
+  if (links) {
+    if (meta.length) rest.appendChild(document.createTextNode(' '));
+    rest.appendChild(links);
+  }
+
+  return el('li', null,
+    el('div', { class: 'papertitle' }, p.title),
+    rest.childNodes.length ? rest : null);
 }
 
 function renderPapers() {
@@ -102,9 +120,9 @@ function renderPapers() {
     const group = papers.filter((p) => p.status === status.key);
     if (!group.length) return;
     const id = `papers-${status.key}`;
-    root.appendChild(el('section', { class: 'section', 'aria-labelledby': id },
+    root.appendChild(el('section', { class: 'homepage-section', 'aria-labelledby': id },
       el('h2', { id }, status.heading),
-      el('ul', { class: 'plain-list' }, group.map((p) => paperItem(p, false)))));
+      el('ul', { class: 'plain-list publication-list' }, group.map((p) => paperItem(p, false)))));
   });
 }
 
@@ -122,16 +140,13 @@ function renderExperience() {
   const list = document.getElementById('experience-list');
   if (!list) return;
   researchExperience.forEach((x) => {
-    const meta = [x.unit, x.institution].filter(Boolean).join(', ');
     let person = '';
     if (x.supervisor) person = x.role === 'Research Assistant' ? `PI: ${x.supervisor}` : `Supervisor: ${x.supervisor}`;
     list.appendChild(el('li', { class: 'entry' },
-      el('div', { class: 'entry-head' },
-        el('span', { class: 'entry-title' }, x.role),
-        el('span', { class: 'entry-date' }, x.period)),
-      el('div', { class: 'entry-meta' }, meta),
-      person ? el('div', { class: 'entry-meta' }, person) : null,
-      x.project ? el('div', { class: 'entry-meta' }, 'Project: ', el('span', { class: 'project-title' }, `“${x.project}”`)) : null,
+      el('div', { class: 'entry-head' }, el('strong', null, `${x.role} (${x.period})`)),
+      el('div', { class: 'entry-rest' }, [x.unit, x.institution].filter(Boolean).join(', ')),
+      person ? el('div', { class: 'entry-rest' }, person) : null,
+      x.project ? el('div', { class: 'entry-rest' }, `Project: “${x.project}”`) : null,
       x.description ? el('p', { class: 'entry-desc' }, x.description) : null));
   });
 }
@@ -142,7 +157,7 @@ function renderHonors() {
   honors.forEach((h) => {
     list.appendChild(el('li', { class: 'dated' },
       el('span', { class: 'dated-year' }, h.year),
-      el('span', null, el('span', { class: 'honor-title' }, h.title), `, ${h.detail}`)));
+      el('span', null, `${h.title}, ${h.detail}`)));
   });
 }
 

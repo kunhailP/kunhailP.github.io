@@ -44,33 +44,35 @@
 <body>
   <div id="site-nav"></div>
 
-  <main id="main-content">
+  <main id="main-content" class="page-shell">
     <noscript><p>This site uses JavaScript to display its content. You can reach Kunwoo Park at
       <a href="mailto:pkw6094@kookmin.ac.kr">pkw6094@kookmin.ac.kr</a>.</p></noscript>
 
-    <section class="section intro" aria-labelledby="name">
-      <h1 id="name">Kunwoo Park</h1>
-      <p class="tagline">Political Science · Political Methodology · Computational Social Science</p>
-      <p class="affiliation">
-        Department of Political Science and International Relations<br>
-        Kookmin University, Seoul, Korea
-      </p>
-      <div id="bio" class="bio"></div>
-      <p id="profile-links" class="profile-links"></p>
+    <section class="profile-section" aria-labelledby="name">
+      <div class="profile-text">
+        <h1 id="name" class="name">Kunwoo Park</h1>
+        <p class="tagline">Political Science · Political Methodology · Computational Social Science</p>
+        <p class="affiliation">
+          Department of Political Science and International Relations<br>
+          Kookmin University, Seoul, Korea
+        </p>
+        <div id="bio" class="bio"></div>
+        <p id="profile-links" class="profile-links"></p>
+      </div>
     </section>
 
-    <section class="section" aria-labelledby="h-education">
+    <section class="homepage-section" aria-labelledby="h-education">
       <h2 id="h-education">Education</h2>
       <ul id="education-list" class="plain-list"></ul>
     </section>
 
-    <section class="section" aria-labelledby="h-selected">
+    <section class="homepage-section" aria-labelledby="h-selected">
       <h2 id="h-selected">Selected Research</h2>
-      <ul id="selected-research-list" class="plain-list"></ul>
-      <a class="more-link" href="papers.html">All papers &rarr;</a>
+      <ul id="selected-research-list" class="plain-list publication-list"></ul>
+      <a class="view-all" href="papers.html">View all papers &rarr;</a>
     </section>
 
-    <section class="section" aria-labelledby="h-honors">
+    <section class="homepage-section" aria-labelledby="h-honors">
       <h2 id="h-honors">Selected Honors</h2>
       <ul id="honors-list" class="plain-list"></ul>
     </section>

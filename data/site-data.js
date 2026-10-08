@@ -28,6 +28,9 @@ const SITE = {
     "Substantively, I study political accountability, blame attribution, welfare politics, and deservingness."
   ],
 
+  // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
+  photo: "",
+
   links: {
     email: "pkw6094@kookmin.ac.kr",
     github: "https://github.com/kunhailP",
@@ -98,7 +101,10 @@ const papers = [
     note: "In Korean.",
     description: "",
     selected: false,
-    links: { paper: "", code: "", data: "", replication: "" }
+    // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
+  photo: "",
+
+  links: { paper: "", code: "", data: "", replication: "" }
   },
   {
     title: "The Exploration Cost of Learning Boundary and Population Causal Effects",
@@ -109,7 +115,10 @@ const papers = [
     // TODO: replace with your own one-sentence summary (no findings claimed here).
     description: "Studies the cost of exploration when the goal is to learn boundary and population causal effects.",
     selected: true,
-    links: { paper: "", code: "", data: "", replication: "" }
+    // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
+  photo: "",
+
+  links: { paper: "", code: "", data: "", replication: "" }
   },
   {
     title: "Asymmetric Enforcement and Take-Up Frictions in Korea’s Basic Pension",
@@ -120,7 +129,10 @@ const papers = [
     // TODO: replace with your own one-sentence summary (no findings claimed here).
     description: "Examines asymmetric enforcement and take-up frictions in Korea’s Basic Pension.",
     selected: true,
-    links: { paper: "", code: "", data: "", replication: "" }
+    // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
+  photo: "",
+
+  links: { paper: "", code: "", data: "", replication: "" }
   },
   {
     title: "Can We Compare Parties Measured by Language Models?",
@@ -131,7 +143,10 @@ const papers = [
     // TODO: replace with your own one-sentence summary (no findings claimed here).
     description: "Asks whether party measures produced by language models can be meaningfully compared.",
     selected: true,
-    links: { paper: "", code: "", data: "", replication: "" }
+    // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
+  photo: "",
+
+  links: { paper: "", code: "", data: "", replication: "" }
   },
   {
     title: "Latent Coverage from Noisy Calibration",
@@ -141,7 +156,10 @@ const papers = [
     note: "",
     description: "",
     selected: false,
-    links: { paper: "", code: "", data: "", replication: "" }
+    // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
+  photo: "",
+
+  links: { paper: "", code: "", data: "", replication: "" }
   },
   {
     title: "After Judgment: Leader–Party Attachments and the Reallocation of Political Blame",
@@ -151,7 +169,10 @@ const papers = [
     note: "",
     description: "",
     selected: false,
-    links: { paper: "", code: "", data: "", replication: "" }
+    // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
+  photo: "",
+
+  links: { paper: "", code: "", data: "", replication: "" }
   },
   {
     title: "Votes Without Neighborhoods: Partial Identification of Neighborhood-Level Voting under Absentee Aggregation",
@@ -161,7 +182,10 @@ const papers = [
     note: "",
     description: "",
     selected: false,
-    links: { paper: "", code: "", data: "", replication: "" }
+    // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
+  photo: "",
+
+  links: { paper: "", code: "", data: "", replication: "" }
   },
   {
     title: "When Texts Are Not Independent: Robust Inference under Semantic Dependence",
@@ -171,7 +195,10 @@ const papers = [
     note: "",
     description: "",
     selected: false,
-    links: { paper: "", code: "", data: "", replication: "" }
+    // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
+  photo: "",
+
+  links: { paper: "", code: "", data: "", replication: "" }
   }
 ];
 
