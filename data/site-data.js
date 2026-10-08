@@ -28,9 +28,6 @@ const SITE = {
     "Substantively, I study political accountability, blame attribution, welfare politics, and deservingness."
   ],
 
-  // Profile photo, e.g. "assets/images/profile.jpg". "" = no photo is shown.
-  photo: "assets/images/profile.jpg",
-
   links: {
     email: "pkw6094@kookmin.ac.kr",
     github: "https://github.com/kunhailP",
